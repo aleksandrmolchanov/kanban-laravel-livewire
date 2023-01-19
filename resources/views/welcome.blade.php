@@ -13,7 +13,8 @@
 
         @livewireStyles
     </head>
-    <body class="antialiased">
+    <body class="antialiased font-roboto">
+        @livewire('kanban')
 
         @livewireScripts
 

@@ -4,6 +4,9 @@ module.exports = {
       "./resources/**/*.blade.php"
   ],
   theme: {
+      fontFamily: {
+          'roboto': ['"Roboto", sans-serif']
+      },
     extend: {},
   },
   plugins: [],
