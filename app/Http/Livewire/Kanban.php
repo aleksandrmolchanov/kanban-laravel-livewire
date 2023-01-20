@@ -41,4 +41,27 @@ class Kanban extends Component
     {
         Card::destroy($id);
     }
+
+    public function updateGroupOrder($order)
+    {
+        foreach ($order as $group)
+        {
+            Group::where(['id' => $group['value']])->update([
+                'sort' => $group['order']
+            ]);
+        }
+    }
+
+    public function updateCardOrder($order)
+    {
+        foreach ($order as $group)
+        {
+            foreach ($group['items'] as $card){
+                Card::where(['id' => $card['value']])->update([
+                    'group_id' => $group['value'],
+                    'sort' => $card['order']
+                ]);
+            }
+        }
+    }
 }
