@@ -16,6 +16,7 @@
     <body class="antialiased font-roboto">
         @livewire('kanban')
 
+        @livewire('livewire-ui-modal')
         @livewireScripts
 
         @vite('resources/js/app.js')
