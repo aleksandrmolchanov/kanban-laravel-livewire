@@ -8,19 +8,28 @@ use Livewire\Component;
 
 class Kanban extends Component
 {
+    protected $listeners = ['reload'];
+
+    public function reload($params)
+    {
+        if(isset($params['message']))
+        {
+            session()->flash('message', $params['message']);
+        }
+        $this->render();
+    }
+
+    public function clearMessage()
+    {
+        session()->forget('message');
+    }
+
     public function render()
     {
         $groups = Group::orderBy('sort')->with('cards')->get();
 
         return view('livewire.kanban', [
             'groups' => $groups
-        ]);
-    }
-
-    public function addGroup()
-    {
-        Group::create([
-           'name' => uniqid()
         ]);
     }
 
@@ -35,6 +44,8 @@ class Kanban extends Component
     public function deleteGroup($id)
     {
         Group::destroy($id);
+
+        session()->flash('message', __('kanban.deleted', ['entity' => 'group']));
     }
 
     public function deleteCard($id)
