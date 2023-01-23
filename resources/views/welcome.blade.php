@@ -14,11 +14,12 @@
         @livewireStyles
     </head>
     <body class="antialiased font-roboto">
+        @vite('resources/js/app.js')
+
         @livewire('kanban')
 
         @livewire('livewire-ui-modal')
-        @livewireScripts
 
-        @vite('resources/js/app.js')
+        @livewireScripts
     </body>
 </html>

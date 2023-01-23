@@ -2,13 +2,18 @@
     <div class="px-10 mt-6">
         <h1 class="text-2xl font-bold">Kanban Laravel Livewire</h1>
     </div>
-    <div class="px-10 mt-6">
-        <a wire:click.prevent="addGroup" href="#" class="flex items-center w-fit p-2 bg-white text-sm font-medium rounded-lg bg-opacity-90 hover:bg-opacity-100">
+    <div class="px-10 mt-6 flex justify-between gap-2">
+        <a wire:click.prevent="$emit('openModal', 'add-group')" href="#" class="flex items-center w-fit p-2 bg-white text-sm font-medium rounded-lg bg-opacity-90 hover:bg-opacity-100">
             <svg class="w-5 h-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
             </svg>
             Add a group
         </a>
+        @if (session()->has('message'))
+            <div x-data="{}" x-init="setTimeout(() => { $wire.clearMessage() }, 5000);" wire:click="clearMessage" class="w-fit p-2 bg-sky-400 text-white text-sm font-medium rounded-lg cursor-pointer">
+                {{ session('message') }}
+            </div>
+        @endif
     </div>
     <div wire:sortable="updateGroupOrder" wire:sortable-group="updateCardOrder" class="flex flex-grow px-10 mt-4 space-x-6 overflow-auto">
         @foreach($groups as $group)
@@ -20,6 +25,11 @@
                     <button wire:click="addCard({{ $group->id }})" class="flex items-center justify-center w-6 h-6 text-indigo-500 rounded hover:bg-indigo-500 hover:text-indigo-100">
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                    </button>
+                    <button wire:click="$emit('openModal', 'edit-group', {{ json_encode(["id" => $group->id]) }})" class="flex items-center justify-center w-6 h-6 text-indigo-800 rounded hover:bg-indigo-700 hover:text-indigo-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                         </svg>
                     </button>
                     <button wire:click="deleteGroup({{ $group->id }})" class="flex items-center justify-center w-6 h-6 text-red-700 rounded hover:bg-red-700 hover:text-red-100">
