@@ -41,18 +41,6 @@ class Kanban extends Component
         ]);
     }
 
-    public function deleteGroup($id)
-    {
-        Group::destroy($id);
-
-        session()->flash('message', __('kanban.deleted', ['entity' => 'group']));
-    }
-
-    public function deleteCard($id)
-    {
-        Card::destroy($id);
-    }
-
     public function updateGroupOrder($order)
     {
         foreach ($order as $group)
