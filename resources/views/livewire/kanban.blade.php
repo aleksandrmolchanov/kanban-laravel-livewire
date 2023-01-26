@@ -10,7 +10,7 @@
             Add a group
         </a>
         @if (session()->has('message'))
-            <div x-data="{}" x-init="setTimeout(() => { $wire.clearMessage() }, 5000);" wire:click="clearMessage" class="w-fit p-2 bg-sky-400 text-white text-sm font-medium rounded-lg cursor-pointer">
+            <div x-data="{}" x-init="setTimeout(() => { $wire.clearMessage() }, 5000);" wire:click="clearMessage" class="w-fit p-2 bg-emerald-400 text-white text-sm font-medium rounded-lg cursor-pointer">
                 {{ session('message') }}
             </div>
         @endif
