@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Group;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 use LivewireUI\Modal\ModalComponent;
 
 class AddGroup extends ModalComponent
@@ -28,8 +29,11 @@ class AddGroup extends ModalComponent
     {
         $this->validate();
 
+        $sortMax = DB::table('groups')->max('sort');
+
         Group::create([
-            'name' => $this->name
+            'name' => $this->name,
+            'sort' => $sortMax ? $sortMax + 1 : 0,
         ]);
 
         $this->emit('reload', [
