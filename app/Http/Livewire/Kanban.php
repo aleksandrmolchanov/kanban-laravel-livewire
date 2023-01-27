@@ -56,7 +56,7 @@ class Kanban extends Component
         foreach ($order as $group)
         {
             foreach ($group['items'] as $card){
-                Card::where(['id' => $card['value']])->update([
+                Card::where(['id' => $card['value']])->toBase()->update([
                     'group_id' => $group['value'],
                     'sort' => $card['order']
                 ]);
