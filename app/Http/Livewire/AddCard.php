@@ -10,6 +10,7 @@ use LivewireUI\Modal\ModalComponent;
 class AddCard extends ModalComponent
 {
     public string $name;
+    public int $type;
     public int $group_id;
 
     public static function modalMaxWidth(): string
@@ -18,12 +19,14 @@ class AddCard extends ModalComponent
     }
 
     protected array $rules = [
-        'name' => 'required|min:2'
+        'name' => 'required|min:2',
+        'type' => 'required'
     ];
 
     public function mount($group_id)
     {
         $this->group_id = $group_id;
+        $this->type = 0;
     }
 
     public function render(): View
@@ -41,6 +44,7 @@ class AddCard extends ModalComponent
 
         Card::create([
             'name' => $this->name,
+            'type' => $this->type,
             'sort' => $sortMax ? $sortMax + 1 : 0,
             'group_id' => $this->group_id
         ]);

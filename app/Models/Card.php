@@ -9,7 +9,7 @@ class Card extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'sort', 'group_id'];
+    protected $fillable = ['name', 'type', 'sort', 'group_id'];
 
     public function group()
     {

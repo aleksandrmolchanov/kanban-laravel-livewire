@@ -17,7 +17,8 @@ class EditCard extends ModalComponent
     }
 
     protected array $rules = [
-        'card.name' => 'required|min:2'
+        'card.name' => 'required|min:2',
+        'card.type' => 'required'
     ];
 
     public function mount($id)
